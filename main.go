@@ -120,7 +120,7 @@ func main() {
 	log.SetFlags(0)
 	files := flag.Args()
 	if len(files) == 0 {
-		fmt.Println("Usage: dnw <file>")
+		flag.Usage()
 		return
 	}
 	buf := prepareWriteBuf(files[0])
