@@ -46,7 +46,7 @@ func flash(buf []byte) {
 	}
 
 	for _, d := range devices {
-		fmt.Printf("%s:%s\n", d.Descriptor.Vendor, d.Descriptor.Product)
+		fmt.Printf("Found device %s:%s\n", d.Descriptor.Vendor, d.Descriptor.Product)
 		defer d.Close()
 	}
 	if len(devices) == 0 {
@@ -112,12 +112,12 @@ func prepareWriteBuf(filename string) []byte {
 
 	csum := checksum(buf.Bytes()[8:])
 	binary.Write(buf, binary.LittleEndian, csum)
-	log.Printf("%X", csum)
 	return buf.Bytes()
 }
 
 func main() {
 	flag.Parse()
+	log.SetFlags(0)
 	files := flag.Args()
 	if len(files) == 0 {
 		fmt.Println("Usage: dnw <file>")
